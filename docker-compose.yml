@@ -9,7 +9,9 @@ services:
       - ./build:/app/build
     environment:
       - NODE_ENV=production
-    command: ["npm", "run", "build"]
+    command: ["sh", "-c", "npm run build"]
+    stop_grace_period: 1m
+    
 
   nginx:
     image: nginx:latest
