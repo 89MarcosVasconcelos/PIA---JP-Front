@@ -1,4 +1,4 @@
-name: Deploy Docker App to EC2
+name: Deploy React App to EC2
 
 on:
   push:
@@ -13,33 +13,27 @@ jobs:
       - name: Checkout código
         uses: actions/checkout@v3
 
-      - name: Copiar arquivos via SSH
+      - name: Instalar dependências e gerar build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Copiar build para EC2 via SSH
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.AWS_REACT_EC2_SSH_KEY }}
-          source: "."
-          target: "~/react-app"
+          source: "build/*"
+          target: "~/react-app/build"
 
-      - name: Executar Docker no EC2
+      - name: Mover build para nginx
         uses: appleboy/ssh-action@v0.1.8
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.AWS_REACT_EC2_SSH_KEY }}
           script: |
-            cd ~/react-app
-
-            # Parar e remover container antigo, se existir
-            docker kill react-app || true
-            docker rm -f react-app || true
-
-            # Liberar a porta 80 caso esteja travada
-            sudo fuser -k 80/tcp || true
-
-            # Construir nova imagem Docker
-            docker build -t react-app .
-
-            # Subir o novo container
-            docker run -d --name react-app -p 80:80 react-app
+            sudo rm -rf /var/www/html/*
+            sudo cp -r ~/react-app/build/* /var/www/html/
+            sudo systemctl restart nginx
