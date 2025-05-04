@@ -6,13 +6,14 @@ import { useNavigate, Link } from 'react-router-dom';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [token, setToken] = useState(null);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://52.54.221.143:8000/o/token/', new URLSearchParams({ 
+      const response = await axios.post('http://52.54.221.143:8000/o/token/', new URLSearchParams({
         grant_type: 'password',
         username,
         password,
@@ -42,7 +43,8 @@ const Login = () => {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-        if (checkResponse.data === '') {
+        if (checkResponse.data == '') {
+          console.log(checkResponse.data);
           navigate('/formulariousuario');
         } else {
           console.log('n vazio');
