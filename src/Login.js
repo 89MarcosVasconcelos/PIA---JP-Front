@@ -24,7 +24,7 @@ const Login = () => {
           'Content-Type': 'application/x-www-form-urlencoded',
         }
       });
-
+      console.log(response.data);
       const accessToken = response.data.access_token;
       setToken(accessToken);
       localStorage.setItem('access_token', accessToken);
