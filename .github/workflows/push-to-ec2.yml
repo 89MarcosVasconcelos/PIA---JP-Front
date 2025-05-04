@@ -30,7 +30,16 @@ jobs:
           key: ${{ secrets.AWS_REACT_EC2_SSH_KEY }}
           script: |
             cd ~/react-app
+
+            # Parar e remover container antigo, se existir
+            docker kill react-app || true
+            docker rm -f react-app || true
+
+            # Liberar a porta 80 caso esteja travada
+            sudo fuser -k 80/tcp || true
+
+            # Construir nova imagem Docker
             docker build -t react-app .
-            docker stop react-app || true
-            docker rm react-app || true
+
+            # Subir o novo container
             docker run -d --name react-app -p 80:80 react-app
