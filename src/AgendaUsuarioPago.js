@@ -7,7 +7,6 @@ import 'datatables.net';
 
 const AgendaUsuarioPago = () => {
     const [agenda, setAgenda] = useState([]);
-    const [idUsuarioPago, setIdUsuarioPago] = useState(null);
     const [nomeUsuario, setNomeUsuario] = useState('');
 
     useEffect(() => {

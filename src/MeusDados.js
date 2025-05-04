@@ -16,8 +16,6 @@ const MeusDados = () => {
     });
     const [nomeUsuario, setNomeUsuario] = useState('');
 
-    const [errors, setErrors] = useState({});
-
     const maskCPF = (value) => {
         const digits = value.replace(/\D/g, '');
         return digits.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');

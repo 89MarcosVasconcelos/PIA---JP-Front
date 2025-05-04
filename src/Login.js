@@ -6,7 +6,6 @@ import { useNavigate, Link } from 'react-router-dom';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [token, setToken] = useState(null);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -43,8 +42,7 @@ const Login = () => {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-        if (checkResponse.data == '') {
-          console.log(checkResponse.data);
+        if (checkResponse.data === '') {
           navigate('/formulariousuario');
         } else {
           console.log('n vazio');

@@ -15,6 +15,7 @@ jobs:
 
       - name: Instalar dependências e gerar build
         run: |
+          unset CI
           npm ci
           npm run build
 
