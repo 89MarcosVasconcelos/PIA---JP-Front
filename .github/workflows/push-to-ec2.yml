@@ -19,7 +19,7 @@ jobs:
           npm ci
           npm run build
 
-      - name: Copiar build para EC2 via SSH
+      - name: Copiar build para EC2 via SCP
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -28,13 +28,13 @@ jobs:
           source: "build/*"
           target: "~/react-app/build"
 
-      - name: Mover build para nginx
+      - name: Acessar EC2 e reiniciar containers
         uses: appleboy/ssh-action@v0.1.8
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.AWS_REACT_EC2_SSH_KEY }}
           script: |
-            sudo rm -rf /var/www/html/*
-            sudo cp -r ~/react-app/build/* /var/www/html/
-            sudo systemctl restart nginx
+            cd ~/react-app
+            docker compose down
+            docker compose up -d --build
