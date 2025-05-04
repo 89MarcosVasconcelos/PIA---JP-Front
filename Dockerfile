@@ -12,8 +12,6 @@ FROM nginx:alpine
 # Copia o build para o diretório do nginx
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Substitui a config padrão do nginx (ajustado o caminho correto)
-COPY docker/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
