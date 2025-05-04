@@ -10,7 +10,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8000/api/v1/register/', { username, password });
+      await axios.post('http://52.1.79.163/api/v1/register/', { username, password });
       alert("Usuário criado com sucesso!");
       navigate('/');
     } catch (error) {
