@@ -84,6 +84,7 @@ const AgendaUsuarioPago = () => {
             });
 
             alert("Confirmação realizada com sucesso.");
+            window.location.reload();
             setAgenda(prevAgenda =>
                 prevAgenda.map(item => item.id === id ? { ...item, aceitar: true } : item)
             );
