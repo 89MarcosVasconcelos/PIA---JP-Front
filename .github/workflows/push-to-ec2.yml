@@ -19,7 +19,7 @@ jobs:
           npm ci
           npm run build
 
-      - name: Copiar build para EC2 via SCP
+      - name: Copiar build para EC2 via SSH
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -28,7 +28,16 @@ jobs:
           source: "build/*"
           target: "~/react-app/build"
 
-      - name: Acessar EC2 e reiniciar containers
+      - name: Copiar docker-compose.yml para EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.AWS_REACT_EC2_SSH_KEY }}
+          source: "docker-compose.yml"
+          target: "~/react-app/"
+
+      - name: Executar docker compose no servidor
         uses: appleboy/ssh-action@v0.1.8
         with:
           host: ${{ secrets.EC2_HOST }}
