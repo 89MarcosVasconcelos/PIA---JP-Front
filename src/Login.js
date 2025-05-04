@@ -13,7 +13,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://52.54.221.143:8000/o/token/', new URLSearchParams({
+      const response = await axios.post('http://52.54.221.143:8000/o/token/', new URLSearchParams({ 
         grant_type: 'password',
         username,
         password,
