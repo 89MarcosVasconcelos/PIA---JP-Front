@@ -1,2 +1,17 @@
-# PIA---JP-Front
-Aplicação front-end em React para o projeto final PUC 25
+
+# Requisitos
+
+
+
+
+# Guia de Configuração
+
+## Passo 1: Instalação das dependencias
+npm install
+
+## Passo 2: Iniciar o servidor
+npm start
+
+    
+
+
