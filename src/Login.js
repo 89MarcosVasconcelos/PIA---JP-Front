@@ -17,7 +17,7 @@ const Login = () => {
         grant_type: 'password',
         username,
         password,
-        client_id: 'sIiB299a7Jv6WyDPfqUvu6ZdbJshtkj5Ax1cioyQ',
+        client_id: 'pFyMBEN5EtMJqpmXJ5OzeDsAm5sRO0ITeWNJJtjg',
         client_secret: 't82J0uzLByoXqT2bTL4MEck0O38mWF5uzJJl1yD0vPvofZzIYdnugp2zN46MA4mXFX1iZQRk376V7dUFZX59aZTYqfN9sYEjhCp9gXTM4en6N812jLQLP0teN7yJGicC',
       }), {
         headers: {
@@ -93,7 +93,6 @@ const Login = () => {
           </button>
         </form>
 
-        {token && <p className="text-center mt-3">Token: {token}</p>}
         <p className="text-center mt-2">
           Não tem conta? <Link to="/register">Registre-se</Link>
         </p>
