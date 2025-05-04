@@ -38,7 +38,7 @@ const Login = () => {
       localStorage.setItem('username', username_auth);
 
       try {
-        const checkResponse = await axios.get(`http://127.0.0.1:8000/api/v1/usuariopagocheckregister/${userId}/`, {
+        const checkResponse = await axios.get(`http://52.54.221.143:8000/api/v1/usuariopagocheckregister/${userId}/`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },

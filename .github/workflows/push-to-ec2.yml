@@ -1,0 +1,36 @@
+name: Deploy Docker App to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Copiar arquivos via SSH
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.AWS_REACT_EC2_SSH_KEY }}
+          source: "."
+          target: "~/react-app"
+
+      - name: Executar Docker no EC2
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.AWS_REACT_EC2_SSH_KEY }}
+          script: |
+            cd ~/react-app
+            docker build -t react-app .
+            docker stop react-app || true
+            docker rm react-app || true
+            docker run -d --name react-app -p 80:80 react-app

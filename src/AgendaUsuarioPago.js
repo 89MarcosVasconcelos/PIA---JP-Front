@@ -19,7 +19,7 @@ const AgendaUsuarioPago = () => {
             }
 
             try {
-                const checkResponse = await axios.get(`http://127.0.0.1:8000/api/v1/usuariopagocheckregister/${userId}/`, {
+                const checkResponse = await axios.get(`http://52.54.221.143:8000/api/v1/usuariopagocheckregister/${userId}/`, {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
                     },
@@ -31,7 +31,7 @@ const AgendaUsuarioPago = () => {
                 
                 setIdUsuarioPago(id_pago);
                 
-                const agendaResponse = await axios.get(`http://127.0.0.1:8000/api/v1/agendausuariopago/${id_pago}/`, {
+                const agendaResponse = await axios.get(`http://52.54.221.143:8000/api/v1/agendausuariopago/${id_pago}/`, {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
                     },
@@ -75,7 +75,7 @@ const AgendaUsuarioPago = () => {
         const accessToken = localStorage.getItem('access_token');
 
         try {
-            await axios.patch(`http://127.0.0.1:8000/api/v1/agendausuariopago/${id}/`, {
+            await axios.patch(`http://52.54.221.143:8000/api/v1/agendausuariopago/${id}/`, {
                 aceitar: '0',
                 data_hora_inicio,
                 data_hora_fim
@@ -103,7 +103,7 @@ const AgendaUsuarioPago = () => {
     const handleNaoConfirmacao = async (id) => {
         const accessToken = localStorage.getItem('access_token');
         try {
-            await axios.delete(`http://127.0.0.1:8000/api/v1/agendausuariopago/${id}/`,  {
+            await axios.delete(`http://52.54.221.143:8000/api/v1/agendausuariopago/${id}/`,  {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },

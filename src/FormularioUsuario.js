@@ -106,7 +106,7 @@ const FormularioUsuario = () => {
         }
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/v1/usuariopago/', {
+            const response = await fetch('http://52.54.221.143:8000/api/v1/usuariopago/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -41,7 +41,7 @@ const MeusDados = () => {
             }
             const userId = localStorage.getItem('id');
             try {
-                const checkResponse = await axios.get(`http://127.0.0.1:8000/api/v1/usuariopagocheckregister/${userId}/`, {
+                const checkResponse = await axios.get(`http://52.54.221.143:8000/api/v1/usuariopagocheckregister/${userId}/`, {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
                     },
@@ -95,7 +95,7 @@ const MeusDados = () => {
         const accessToken = localStorage.getItem('access_token');
 
         try {
-            await axios.patch(`http://127.0.0.1:8000/api/v1/usuariopago/${formData.id_usuario_pago}/`, formData, {
+            await axios.patch(`http://52.54.221.143:8000/api/v1/usuariopago/${formData.id_usuario_pago}/`, formData, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
