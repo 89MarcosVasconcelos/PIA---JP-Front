@@ -1,8 +1,6 @@
-version: '3.8'
-
 services:
   react-app:
     build: .
     ports:
-      - "80:8080" # Porta externa 80 aponta para 8080 do Nginx
+      - "8080:8080"
     restart: always
