@@ -1,9 +1,11 @@
+version: '3.9'
+
 services:
   react-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: minha-react-app:latest
+    build: .
+    environment:
+      SIP_CLIENT_ID:  "${REACT_APP_SIP_CLIENT_ID}"
+      SIP_SECRET:  "${REACT_APP_SIP_SECRET}"
     ports:
-      - "8080:80"
+      - "80:80"
     restart: always
