@@ -39,20 +39,12 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.AWS_REACT_EC2_SSH_KEY }}
           script: |
-            # Verificar se o Docker está instalado
-            if ! command -v docker &> /dev/null
-            then
-                echo "🔧 Docker não encontrado. Instalando..."
-                sudo apt-get update
-                sudo apt-get install -y docker.io docker-compose
-                sudo systemctl start docker
-                sudo systemctl enable docker
-                sudo usermod -aG docker $USER
-                newgrp docker
-            fi
-
-            # Continuar com os comandos Docker após instalação
             cd ~/react-app
-            docker compose down --rmi all --volumes --remove-orphans
-            docker compose build --no-cache
-            docker compose up -d
+            # Parar os containers e remover volumes e imagens
+            docker-compose down --volumes --remove-orphans
+            
+            # Construir as imagens sem cache
+            docker-compose build --no-cache
+            
+            # Subir os containers em segundo plano
+            docker-compose up -d
