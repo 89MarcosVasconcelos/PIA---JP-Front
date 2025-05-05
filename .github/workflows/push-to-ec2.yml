@@ -10,34 +10,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout código
+      - name: Checkout do repositório
         uses: actions/checkout@v3
 
-      - name: Instalar dependências e gerar build
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Instalar dependências e build
         run: |
-          unset CI
-          npm ci
+          npm install
           npm run build
 
-      - name: Copiar build para EC2 via SSH
-        uses: appleboy/scp-action@v0.1.7
+      - name: Copiar arquivos para a EC2
+        uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.AWS_REACT_EC2_SSH_KEY }}
-          source: "build/*"
-          target: "~/react-app/build"
+          source: "."
+          target: "~/react-app"
 
-      - name: Copiar docker-compose.yml para EC2
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.AWS_REACT_EC2_SSH_KEY }}
-          source: "docker-compose.yml"
-          target: "~/react-app/"
-
-      - name: Executar docker compose no servidor
+      - name: Deploy via SSH na EC2
         uses: appleboy/ssh-action@v0.1.8
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -45,5 +40,5 @@ jobs:
           key: ${{ secrets.AWS_REACT_EC2_SSH_KEY }}
           script: |
             cd ~/react-app
-            docker compose down
-            docker compose up -d --build
+            docker compose down || true
+            docker compose up --build -d
