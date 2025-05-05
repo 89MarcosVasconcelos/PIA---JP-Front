@@ -4,8 +4,8 @@ services:
   react-app:
     build: .
     environment:
-      SIP_CLIENT_ID:  "${REACT_APP_SIP_CLIENT_ID}"
-      SIP_SECRET:  "${REACT_APP_SIP_SECRET}"
+      SIP_CLIENT_ID:  "${EC2_USER}"
+      SIP_SECRET:  "${AWS_REACT_EC2_SSH_KEY}"
     ports:
       - "80:80"
     restart: always
