@@ -21,7 +21,7 @@ jobs:
       - name: Instalar dependências e build
         run: |
           npm install
-          npm run build
+          CI='' npm run build
 
       - name: Copiar arquivos para a EC2
         uses: appleboy/scp-action@v0.1.4
