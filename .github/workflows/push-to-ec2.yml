@@ -31,6 +31,10 @@ jobs:
           key: ${{ secrets.AWS_REACT_EC2_SSH_KEY }}
           source: "."
           target: "~/react-app"
+          rm: true     # Remove arquivos antigos no destino
+          overwrite: true
+          debug: true
+          
 
       - name: Deploy via SSH na EC2
         uses: appleboy/ssh-action@v0.1.8
