@@ -38,6 +38,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.AWS_REACT_EC2_SSH_KEY }}
+          command_timeout: 1200
           script: |
             # Navegar para o diretório da aplicação
             cd ~/react-app
