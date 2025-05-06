@@ -9,7 +9,7 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    try {
+    try { 
       await axios.post('http://52.54.221.143:8000/api/v1/register/', { username, password });
       alert("Usuário criado com sucesso!");
       navigate('/');
