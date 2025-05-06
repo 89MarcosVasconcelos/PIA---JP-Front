@@ -15,7 +15,7 @@ const Register = () => {
       navigate('/');
     } catch (error) {
       alert(error.response?.data?.error || 'Erro ao registrar');
-      //console.log(error);
+      console.log(error);
     }
   };
 
