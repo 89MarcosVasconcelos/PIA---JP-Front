@@ -39,12 +39,11 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.AWS_REACT_EC2_SSH_KEY }}
           script: |
+            # Navegar para o diretório da aplicação
             cd ~/react-app
-            # Parar os containers e remover volumes e imagens
+
+            # Parar e remover containers, volumes e orphans
             docker-compose down --volumes --remove-orphans
-            
-            # Construir as imagens sem cache
-            docker-compose build --no-cache
-            
-            # Subir os containers em segundo plano
-            docker-compose up -d
+
+            # Construir novamente as imagens sem cache
+            docker-compose up --build -d
